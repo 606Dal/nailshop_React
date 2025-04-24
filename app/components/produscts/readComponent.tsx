@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useProductStore } from "~/store/productStore";
 import type { ProductRead } from "~/types/product";
 
 
@@ -13,7 +14,13 @@ export default function ProductReadComponent({ data }: ProductReadProps) {
 
     const imageUrl = `http://localhost/uploads/`;
     
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const setCurrentProduct = useProductStore((state) => state.setCurrentProduct);
+
+    const handleModify = () => {
+        setCurrentProduct(data); // zustand에 저장
+        navigate(`/products/modify/${data.pno}`); // 페이지 이동
+    };
     
 
     return (
@@ -46,7 +53,7 @@ export default function ProductReadComponent({ data }: ProductReadProps) {
             {/* 수정/삭제 버튼 */}
             <div className="flex justify-center gap-6 mt-6">
                 <button
-                    onClick={() => navigate(`/products/modify/${data.pno}`, { state: data })}
+                    onClick={handleModify}
                     className="px-5 py-2 bg-sky-200 rounded hover:bg-blue-300 transition"
                 >
                     수정

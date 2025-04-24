@@ -47,8 +47,8 @@ export interface ProductAdd extends ProductBase {
 export interface ProductRead extends ProductBase {
     pno: number,
     imageNames: string[],
-    regDate?: string,
-    modDate?: string, 
+    regDate: string,
+    modDate: string, 
 }
 
 export interface ProductModify extends ProductBase {

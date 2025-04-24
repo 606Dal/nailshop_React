@@ -1,15 +1,14 @@
 import { create } from 'zustand';
+import type { ProductRead } from '~/types/product';
 
-interface ProductStore {
-  page: number;
-  size: number;
-  setPage: (page: number) => void;
-  setSize: (size: number) => void;
+interface ProductState {
+  currentProduct: ProductRead | null;
+  setCurrentProduct: (product: ProductRead) => void;
+  clearCurrentProduct: () => void;
 }
 
-export const useProductStore = create<ProductStore>((set) => ({
-  page: 1,
-  size: 10,
-  setPage: (page) => set({ page }),
-  setSize: (size) => set({ size }),
+export const useProductStore = create<ProductState>((set) => ({
+  currentProduct: null,
+  setCurrentProduct: (product) => set({ currentProduct: product }),
+  clearCurrentProduct: () => set({ currentProduct: null }),
 }));

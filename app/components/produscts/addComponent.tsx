@@ -37,19 +37,19 @@ function ProductAddComponent() {
         // return await addProduct(dto);
         },
         onSuccess: () => {
-        // alert("상품 등록 완료!");
-        formRef.current?.reset();
+          // alert("상품 등록 완료!");
+          formRef.current?.reset();
         },
         onError: () => {
-        alert("등록 중 오류가 발생했습니다.");
+          alert("등록 중 오류가 발생했습니다.");
         }
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (formRef.current) {
-        const formData = new FormData(formRef.current);
-        mutation.mutate(formData);
+          const formData = new FormData(formRef.current);
+          mutation.mutate(formData);
         }
     };
 

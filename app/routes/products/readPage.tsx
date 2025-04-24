@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
-import { productRead } from '~/api/productAPI';
 import ProductReadComponent from '~/components/produscts/readComponent';
+import { readProduct } from '~/api/productAPI';
 
 export default function ReadPage() {
     const { pno } = useParams<{ pno: string }>();
@@ -13,7 +13,7 @@ export default function ReadPage() {
 
             console.log("---------------query run-------------------")
 
-            const products = await productRead(Number(pno));
+            const products = await readProduct(Number(pno));
             return products;
         },
         enabled: !!pno,

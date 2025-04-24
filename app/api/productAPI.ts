@@ -33,25 +33,26 @@ export async function addProduct(product: ProductAdd) {
     return res.data
 }
 
-export async function productRead(pno: number): Promise<ProductRead> {
+export async function readProduct(pno: number): Promise<ProductRead> {
 
     const res = await axios.get<ProductRead>(`${host}/${pno}`)
 
     return res.data
 }
 
-export async function modifyProduct(pno: number, product: ProductModify) {
+export async function modifyProduct(product: ProductModify) {
     const formData = new FormData()
 
     formData.append("pname", product.pname)
     formData.append("pdesc", product.pdesc)
     formData.append("price", product.price.toString())
 
+    product.imageNames.forEach((imgName) => formData.append("imageNames", imgName));
     product.files.forEach(file => {
         formData.append("files", file)
     })
 
-    const res = await axios.post(`${host}/modify/${pno}`, formData, {
+    const res = await axios.put(`${host}/modify/${product.pno}`, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
